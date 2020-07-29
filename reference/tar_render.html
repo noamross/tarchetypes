@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Target that renders an R Markdown report
-which depends on upstream targets. — tar_render • tarchetypes</title>
+<title>Alternative to tar_target() R Markdown. — tar_render • tarchetypes</title>
 
 
 <!-- jquery -->
@@ -40,11 +39,9 @@ which depends on upstream targets. — tar_render • tarchetypes</title>
 
 
 
-<meta property="og:title" content="Target that renders an R Markdown report
-which depends on upstream targets. — tar_render" />
-<meta property="og:description" content="Dependency targets are explicitly declared with
-tar_load() or tar_read() in active R code chunks in the
-report itself (stems and patterns only, no branch names)." />
+<meta property="og:title" content="Alternative to tar_target() R Markdown. — tar_render" />
+<meta property="og:description" content="Shorthand for the correct way to include an R Markdown
+report in a targets pipeline." />
 
 
 
@@ -118,16 +115,14 @@ report itself (stems and patterns only, no branch names)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Target that renders an R Markdown report
-which depends on upstream targets.</h1>
+    <h1>Alternative to <code>tar_target()</code> R Markdown.</h1>
     <small class="dont-index">Source: <a href='https://github.com/wlandau/tarchetypes/blob/master/R/tar_render.R'><code>R/tar_render.R</code></a></small>
     <div class="hidden name"><code>tar_render.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Dependency targets are explicitly declared with
-<code><a href='https://rdrr.io/pkg/targets/man/tar_load.html'>tar_load()</a></code> or <code><a href='https://rdrr.io/pkg/targets/man/tar_read.html'>tar_read()</a></code> in active R code chunks in the
-report itself (stems and patterns only, no branch names).</p>
+    <p>Shorthand for the correct way to include an R Markdown
+report in a <code>targets</code> pipeline.</p>
     </div>
 
     <pre class="usage"><span class='fu'>tar_render</span>(
@@ -237,15 +232,27 @@ source file is last. But unlike <code><a href='https://rdrr.io/pkg/rmarkdown/man
 all returned paths are <em>relative</em> paths to ensure portability
 (so that the project can be moved from one file system to another
 without invalidating the target).</p>
-    <h2 class="hasAnchor" id="working-directory"><a class="anchor" href="#working-directory"></a>Working directory</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
-
-<p>The current working directory (i.e. <code><a href='https://rdrr.io/r/base/getwd.html'>getwd()</a></code>) must contain the
-<code>_targets/</code> data store not only when <code><a href='https://rdrr.io/pkg/targets/man/tar_knitr.html'>tar_knitr()</a></code> is evaluated,
-but also when the actual report is run. That is why <code>tar_render()</code>
-always sets <code>knitr_root_dir</code> to the working directory from which
-<code><a href='https://rdrr.io/pkg/rmarkdown/man/render.html'>rmarkdown::render()</a></code> is called.</p>
+    <p><code>tar_render()</code> is an alternative to <code><a href='https://rdrr.io/pkg/targets/man/tar_target.html'>tar_target()</a></code> for
+R Markdown reports that depend on other targets. The R Markdown source
+should mention dependency targets with <code><a href='https://rdrr.io/pkg/targets/man/tar_load.html'>tar_load()</a></code> and <code><a href='https://rdrr.io/pkg/targets/man/tar_read.html'>tar_read()</a></code>
+in the active code chunks (which also allows you to render the report
+outside the pipeline if the <code>_targets/</code> data store already exists).
+Then, <code>tar_render()</code> defines a special kind of target. It
+1. Finds all the <code><a href='https://rdrr.io/pkg/targets/man/tar_load.html'>tar_load()</a></code>/<code><a href='https://rdrr.io/pkg/targets/man/tar_read.html'>tar_read()</a></code> dependencies in the report
+and inserts them into the target's command.
+This enforces the proper dependency relationships.
+2. Sets <code>format = "file"</code> (see <code><a href='https://rdrr.io/pkg/targets/man/tar_target.html'>tar_target()</a></code>) so <code>targets</code>
+watches the files at the returned paths and reruns the report
+if those files change.
+3. Configures the target's command to return both the output
+report files and the input source file. All these file paths
+are relative paths so the project stays portable.
+4. Forces the report to run in the user's current working directory
+instead of the working directory of the report.
+5. Sets convenient default options such as <code>deployment = "local"</code>
+in the target and <code>quiet = TRUE</code> in <code><a href='https://rdrr.io/pkg/rmarkdown/man/render.html'>rmarkdown::render()</a></code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
