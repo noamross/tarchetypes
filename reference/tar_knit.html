@@ -150,7 +150,7 @@ targets pipeline." />
     </tr>
     <tr>
       <th>path</th>
-      <td><p>Character string, file path to the R Markdown source file.
+      <td><p>Character string, file path to the <code>knitr</code> source file.
 Must have length 1.</p></td>
     </tr>
     <tr>
@@ -227,7 +227,7 @@ rules that decide whether the target is up to date.</p></td>
     <p>A <code><a href='https://rdrr.io/pkg/targets/man/tar_target.html'>tar_target()</a></code> object with <code>format = "file"</code>.
 When this target runs, it returns a character vector
 of file paths. The first file paths are the output files
-(returned by <code><a href='https://rdrr.io/pkg/knitr/man/knit.html'>knitr::knit()</a></code>) and the R Markdown
+(returned by <code><a href='https://rdrr.io/pkg/knitr/man/knit.html'>knitr::knit()</a></code>) and the <code>knitr</code>
 source file is last. But unlike <code><a href='https://rdrr.io/pkg/knitr/man/knit.html'>knitr::knit()</a></code>,
 all returned paths are <em>relative</em> paths to ensure portability
 (so that the project can be moved from one file system to another
@@ -235,7 +235,7 @@ without invalidating the target).</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code>tar_knit()</code> is an alternative to <code><a href='https://rdrr.io/pkg/targets/man/tar_target.html'>tar_target()</a></code> for
-<code>knitr</code> reports that depend on other targets. The R Markdown source
+<code>knitr</code> reports that depend on other targets. The <code>knitr</code> source
 should mention dependency targets with <code><a href='https://rdrr.io/pkg/targets/man/tar_load.html'>tar_load()</a></code> and <code><a href='https://rdrr.io/pkg/targets/man/tar_read.html'>tar_read()</a></code>
 in the active code chunks (which also allows you to knit the report
 outside the pipeline if the <code>_targets/</code> data store already exists).
