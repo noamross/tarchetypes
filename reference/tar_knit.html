@@ -130,13 +130,13 @@ targets pipeline." />
   <span class='kw'>path</span>,
   packages = (<span class='fu'><a href='https://rdrr.io/r/base/zpackages.html'>.packages</a></span>()),
   library = <span class='kw'>NULL</span>,
-  error = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option.html'>tar_option</a></span>(<span class='st'>"error"</span>),
+  error = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"error"</span>),
   deployment = <span class='st'>"local"</span>,
   priority = <span class='fl'>0</span>,
-  template = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option.html'>tar_option</a></span>(<span class='st'>"template"</span>),
-  resources = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option.html'>tar_option</a></span>(<span class='st'>"resources"</span>),
-  retrieval = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option.html'>tar_option</a></span>(<span class='st'>"retrieval"</span>),
-  cue = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option.html'>tar_option</a></span>(<span class='st'>"cue"</span>),
+  template = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"template"</span>),
+  resources = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"resources"</span>),
+  retrieval = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"retrieval"</span>),
+  cue = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"cue"</span>),
   quiet = <span class='fl'>TRUE</span>,
   <span class='kw'>...</span>
 )</pre>
@@ -156,7 +156,7 @@ Must have length 1.</p></td>
     <tr>
       <th>packages</th>
       <td><p>Character vector of packages to load right before
-the target builds. Use <code><a href='https://rdrr.io/pkg/targets/man/tar_options.html'>tar_options()</a></code> to set packages
+the target builds. Use <code><a href='https://rdrr.io/pkg/targets/man/tar_option_set.html'>tar_option_set()</a></code> to set packages
 globally for all subsequent targets you define.</p></td>
     </tr>
     <tr>
